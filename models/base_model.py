@@ -27,7 +27,7 @@ class BaseModel:
 
     def to_dict(self):
         """Returns a new dictionary"""
-        new_dict = self.__dict__
+        new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = str(self.created_at.isoformat())
         new_dict["updated_at"] = str(self.updated_at.isoformat())
