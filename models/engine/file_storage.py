@@ -6,9 +6,8 @@ import os
 
 class FileStorage:
 
-    def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """Returns the dictionary of objects"""
@@ -26,9 +25,13 @@ class FileStorage:
 
     def reload(self):
         """Reads JSON file"""
-        if os.path.exists(self.__file_path):
+        if os.path.exists(FileStorage.__file_path):
             with open(self.__file_path, mode='r', encoding="utf-8") as f:
                 read_data = f.read()
-            self.__objects = json.loads(read_data)
+                dictionary = json.loads(read_data)
+                for k, v in dictionary.items():
+                    value = dictionary[k]
+                    obj = eval(value['__class__'])(**value)
+                    self.__objects[k] = obj
         else:
             pass
