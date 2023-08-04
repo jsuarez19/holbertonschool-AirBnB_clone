@@ -3,10 +3,9 @@
 Writing the BaseModel class
 """
 
-
+import models
 from datetime import datetime
 from uuid import uuid4
-from models.__init__ import storage
 
 
 class BaseModel:
@@ -28,7 +27,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """__str__ method"""
@@ -38,7 +37,7 @@ class BaseModel:
     def save(self):
         """Updates current datetime"""
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a new dictionary"""
