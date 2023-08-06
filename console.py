@@ -9,7 +9,6 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """Define the console"""
-    intro = "Welcome to the AirBNB_clone console"
     prompt = "(hbnb)"
     file = None
 
