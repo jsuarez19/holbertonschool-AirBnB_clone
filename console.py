@@ -50,35 +50,39 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         arg_list = args.split()
-        all_objects = models.storage.all()
-        key = "{}.{}".format(args[0], args[1])
         if not args:
             print("** class name missing **")
-        elif args[0] not in self.classes:
+        elif arg_list[0] not in self.classes:
             print("** class doesn't exist **")
-        elif not args[1]:
+        elif not arg_list[1]:
             print("** instance id missing **")
-        elif key not in all_objects:
-            print("** no instance found **")
         else:
-            print(all_objects[key])
+            all_objects = models.storage.all()
+            key = "{}.{}".format(arg_list[0], arg_list[1])
+            if key not in all_objects:
+                print("** no instance found **")
+            else:
+                print(all_objects[key])
 
     def do_destroy(self, args):
         arg_list = args.split()
-        all_objects = models.storage.all()
-        key = "{}.{}".format(args[0], args[1])
         if not args:
             print("** class name missing **")
-        elif args[0] not in self.classes:
+        elif arg_list[0] not in self.classes:
             print("** class doesn't exist **")
-        elif not args[1]:
+        elif not arg_list[1]:
             print("** instance id missing **")
-        elif key not in all_objects:
-            print("** no instance found **")
         else:
-            del (all_objects[key])
+            all_objects = models.storage.all()
+            key = "{}.{}".format(arg_list[0], arg_list[1])
+            if key not in all_objects:
+                print("** no instance found **")
+            else:
+                del all_objects[key]
 
+ 
     def do_all(self, args):
+        arg_list = args.split()
         all_objects = models.storage.all()
         if not args:
             print(all_objects)
