@@ -21,10 +21,13 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         obj = BaseModel()
-        firstMoment = obj.updated_at
+        first_crt = obj.created_at
+        first_upd = obj.updated_at
         obj.save()
-        secondMoment = obj.updated_at
-        self.assertNotEqual(firstMoment, secondMoment)
+        second_crt = obj.created_at
+        second_upd = obj.updated_at
+        self.assertEqual(first_crt, second_crt)
+        self.assertNotEqual(first_upd, second_upd)
 
     def test_to_dict(self):
         obj = BaseModel()
