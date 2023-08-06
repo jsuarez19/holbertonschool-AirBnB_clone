@@ -11,6 +11,7 @@ class TestFileStorage(unittest.TestCase):
     def test_all(self):
         storage = FileStorage()
         self.assertIsInstance(storage.all(), dict)
+        self.assertIsEqual(storage.all(), storage._FileStorage__objects)
 
     def test_reload(self):
         obj = BaseModel()

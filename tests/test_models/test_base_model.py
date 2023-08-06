@@ -23,7 +23,8 @@ class TestBaseModel(unittest.TestCase):
         obj = BaseModel()
         firstMoment = obj.updated_at
         obj.save()
-        self.assertNotEqual(obj.updated_at, firstMoment)
+        secondMoment = obj.updated_at
+        self.assertNotEqual(firstMoment, secondMoment)
 
     def test_to_dict(self):
         obj = BaseModel()
