@@ -25,7 +25,7 @@ class BaseModel:
 %dT%H:%M:%S.%f')
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
+            self.created_at = datetime.utcnow()
             self.updated_at = self.created_at
             models.storage.new(self)
 
