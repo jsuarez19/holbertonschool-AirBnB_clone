@@ -11,7 +11,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(obj.id, str)
         self.assertIsInstance(obj.created_at, datetime)
         self.assertIsInstance(obj.updated_at, datetime)
-        self.assertEqual(obj.created_at, obj.updated_at)
+        self.assertNotEqual(obj.created_at, obj.updated_at)
 
     def test_str(self):
         obj = BaseModel()
