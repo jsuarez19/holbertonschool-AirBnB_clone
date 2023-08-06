@@ -24,10 +24,14 @@ class TestBaseModel(unittest.TestCase):
         first_crt = obj.created_at
         first_upd = obj.updated_at
         obj.save()
+        self.assertNotEqual(obj.updated_at, datetime.utcnow())
         second_crt = obj.created_at
         second_upd = obj.updated_at
         self.assertEqual(first_crt, second_crt)
         self.assertNotEqual(first_upd, second_upd)
+        self.assertIsInstance(obj.created_at, datetime)
+        self.assertIsInstance(obj.updated_at, datetime)
+
 
     def test_to_dict(self):
         obj = BaseModel()
