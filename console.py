@@ -38,53 +38,53 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """To create new instance of BaseModel"""
+        """To create new instance of a class"""
         if not args:
             print("** class name missing **")
         elif args not in self.classes:
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
+            new_instance = self.classes[args]()
             new_instance.save()
             print(new_instance.id)
 
     def do_show(self, args):
+        arg_list = args.split()
+        all_objects = storage.all()
+        key = "{}.{}".format(args[0], args[1])
         if not args:
             print("** class name missing **")
-        arg_list = args.split()
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
         elif not args[1]:
             print("** instance id missing **")
-        all_objects = storage.all()
-        key = "{}.{}".format(args[0], args[1])
         elif key not in all_objects:
             print("** no instance found **")
         else:
             print(all_objects[key])
 
     def do_destroy(self, args):
+        arg_list = args.split()
+        all_objects = storage.all()
+        key = "{}.{}".format(args[0], args[1])
         if not args:
             print("** class name missing **")
-        arg_list = args.split()
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
         elif not args[1]:
             print("** instance id missing **")
-        all_objects = storage.all()
-        key = "{}.{}".format(args[0], args[1])
         elif key not in all_objects:
             print("** no instance found **")
         else:
             del (all_objects[key])
 
     def do_all(self, args):
+        all_objects = storage.all()
         if not args:
             print(all_objects)
         elif args not in self.classes:
             print("** class doesn't exist **")
         else:
-            all_objects = storage.all()
             result = []
             for k, v in all_objects.items():
                 result.append(str(v))       
