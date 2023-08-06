@@ -32,7 +32,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(obj.created_at, datetime)
         self.assertIsInstance(obj.updated_at, datetime)
 
-
     def test_to_dict(self):
         obj = BaseModel()
         obj_dict = obj.to_dict()
