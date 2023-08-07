@@ -113,8 +113,10 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 setattr(all_objects[key], arg_list[2], arg_list[3])
-                all_objects.save
+                models.storage.save()
 
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
+
