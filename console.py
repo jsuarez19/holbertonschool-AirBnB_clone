@@ -20,9 +20,9 @@ class HBNBCommand(cmd.Cmd):
     """Define the console"""
     prompt = "(hbnb)"
     file = None
-    classes = {"BaseModel": BaseModel, "Amenity": Amenity, 
-            "City": City, "Place": Place, "Review": Review, 
-            "State": State, "User": User} 
+    classes = {"BaseModel": BaseModel, "Amenity": Amenity,
+               "City": City, "Place": Place, "Review": Review,
+               "State": State, "User": User}
 
     def do_quit(self, args):
         """To exit the console"""
@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
         """To exit the console with Ctrl+D"""
         print()
         return True
-   
+
     def emptyline(self):
         """To do nothing when empty line is passed"""
         pass
@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 del all_objects[key]
                 models.storage.save()
- 
+
     def do_all(self, args):
         arg_list = args.split()
         all_objects = models.storage.all()
@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             result = []
             for k, v in all_objects.items():
-                result.append(str(v))       
+                result.append(str(v))
             print(result)
 
     def do_update(self, args):
@@ -118,5 +118,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
-

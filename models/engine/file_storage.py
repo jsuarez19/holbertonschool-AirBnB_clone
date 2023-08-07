@@ -28,7 +28,7 @@ class FileStorage:
         """Writes dict __objects to a JSON file"""
         with open(FileStorage.__file_path, mode='w', encoding="utf-8") as f:
             dictionary = {}
-            for k,v in FileStorage.__objects.items():
+            for k, v in FileStorage.__objects.items():
                 dictionary[k] = v.to_dict()
             f.write(json.dumps(dictionary))
 
