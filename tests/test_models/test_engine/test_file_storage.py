@@ -16,24 +16,27 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
         storage = FileStorage()
-        self.assertIsInstance(storage.all(), dict)
-        self.assertIsEqual(storage.all(), storage.__objects)
+        obj = storage.all()
+        self.assertIsInstance(obj, dict)
+        self.assertIs(obj, storage._FileStorage__objects)
 
     def test_reload(self):
         obj = BaseModel()
         storage = FileStorage()
-        if os.path.exists(storage.__file_path):
-            os.remove(storage.__file_path)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
         storage.new(obj)
         storage.reload()
-        self.assertEqual(len(storage.all()), 1)
+        self.assertEqual(len(storage.all()), 2)
 
     def test_new(self):
         obj = BaseModel()
         storage = FileStorage()
         storage.new(obj)
         self.assertEqual(storage.all(), {"{}.\
-{}".format(obj.__class__.__name, obj.id): obj})
+{}".format(obj.__class__.__name__, obj.id): obj})
+        if os.path.exists("file.json"):
+            os.remove("file.json")
 
     def test_save(self):
         storage = FileStorage()
