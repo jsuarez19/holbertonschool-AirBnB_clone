@@ -7,9 +7,9 @@ class TestReview(unittest.TestCase):
 
     def test_init(self):
         obj = Review()
-        self.assertEqual(place_id, "")
-        self.assertEqual(user_id, "")
-        self.assertEqual(text, "")
+        self.assertEqual(obj.place_id, "")
+        self.assertEqual(obj.user_id, "")
+        self.assertEqual(obj.text, "")
 
 
 if __name__ == "__main__":
