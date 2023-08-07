@@ -14,6 +14,12 @@ from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
 
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except Exception:
+            pass
+
     def test_all(self):
         storage = FileStorage()
         obj = storage.all()
@@ -21,15 +27,21 @@ class TestFileStorage(unittest.TestCase):
         self.assertIs(obj, storage._FileStorage__objects)
 
     def test_reload(self):
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
         obj = BaseModel()
         storage = FileStorage()
-        if os.path.exists("file.json"):
-            os.remove("file.json")
         storage.new(obj)
         storage.reload()
         self.assertEqual(len(storage.all()), 2)
 
     def test_new(self):
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
         obj = BaseModel()
         storage = FileStorage()
         storage.new(obj)
