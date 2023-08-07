@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             if key not in all_objects:
                 print("** no instance found **")
             else:
-                settattr(all_objects, arg_list[2], arg_list[3])
+                setattr(all_objects, arg_list[2], arg_list[3])
                 all_objects.save
 
 
