@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg_list[0] not in self.classes:
             print("** class doesn't exist **")
-        elif not arg_list[1]:
+        elif len(arg_list) < 2:
             print("** instance id missing **")
         else:
             all_objects = models.storage.all()
@@ -70,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg_list[0] not in self.classes:
             print("** class doesn't exist **")
-        elif not arg_list[1]:
+        elif len(arg_list) < 2:
             print("** instance id missing **")
         else:
             all_objects = models.storage.all()
@@ -79,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 del all_objects[key]
-
+                models.storage.save()
  
     def do_all(self, args):
         arg_list = args.split()
@@ -93,6 +93,27 @@ class HBNBCommand(cmd.Cmd):
             for k, v in all_objects.items():
                 result.append(str(v))       
             print(result)
+
+    def do_update(self, args):
+        arg_list = args.split()
+        if not args:
+            print("** class name missing **")
+        elif arg_list[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(arg_list) < 2:
+            print("** instance id missing **")
+        elif len(arg_list) < 3:
+            print("** attribute name missing **")
+        elif len(arg_list) < 4:
+            print("** value missing **")
+        else:
+            all_objects = models.storage.all()
+            key = "{}.{}".format(arg_list[0], arg_list[1])
+            if key not in all_objects:
+                print("** no instance found **")
+            else:
+                settattr(all_objects, arg_list[2], arg_list[3])
+                all_objects.save
 
 
 if __name__ == '__main__':
